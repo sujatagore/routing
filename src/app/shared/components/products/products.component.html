@@ -1,0 +1,25 @@
+
+
+<div class="row" *ngIf="productsData.length > 0; else noProduct">
+    <div class="col-md-12 text-right">
+        <button mat-mini-fab color="accent" class="icon"
+        routerLink="addproduct"><mat-icon>plus_one</mat-icon></button>
+    </div>
+    <div class="col-md-4">
+        <mat-list role="list">
+            <mat-list-item role="listitem"
+                *ngFor="let product of productsData"
+                [routerLink]="[product.pid ]"
+                [queryParams]="{canReturn : product.canReturn}">{{product.pname}}</mat-list-item>
+        </mat-list>
+    </div>
+    <div class="col-md-8">
+
+    </div>
+</div>
+
+<ng-template #noProduct>
+    <p class="alert alert-warning">
+        No Products data available
+    </p>
+</ng-template>
