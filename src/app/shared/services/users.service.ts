@@ -30,7 +30,7 @@ export class UsersService {
       userId: '1',
       userRole: 'admin',
       userEmail: 'jhon@example.com',
-      userPhone: '123-456-7890',
+      userPhone: '1234567890',
       userAddress: '123 Main St'
     },
     {
@@ -38,7 +38,7 @@ export class UsersService {
       userId: '2',
       userRole: 'buyer',
       userEmail: 'jon@example.com',
-      userPhone: '987-654-3210',
+      userPhone: '9876543210',
       userAddress: '456 Elm St'
     },
     {
@@ -46,7 +46,7 @@ export class UsersService {
       userId: '3',
       userRole: 'admin',
       userEmail: 'may@example.com',
-      userPhone: '555-123-4567',
+      userPhone: '5551234567',
       userAddress: '789 Oak St'
     },
     {
@@ -54,7 +54,7 @@ export class UsersService {
       userId: '4',
       userRole: 'buyer',
       userEmail: 'emily@example.com',
-      userPhone: '111-222-3333',
+      userPhone: '1112223333',
       userAddress: '321 Pine St'
     },
     {
@@ -62,7 +62,7 @@ export class UsersService {
       userId: '5',
       userRole: 'admin',
       userEmail: 'david@example.com',
-      userPhone: '444-555-6666',
+      userPhone: '4445556666',
       userAddress: '901 Maple St'
     },
     {
@@ -70,7 +70,7 @@ export class UsersService {
       userId: '6',
       userRole: 'buyer',
       userEmail: 'sarah@example.com',
-      userPhone: '777-888-9999',
+      userPhone: '7778889999',
       userAddress: '234 Cedar St'
     }
   ]

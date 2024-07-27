@@ -82,7 +82,8 @@ export class UserFormComponent implements OnInit {
   onUpdateUser(){
     if (this.userForm.valid) {
       let updUserObj = {...this.userForm.value, userId : this.userId};
-      this._userService.updateUser(updUserObj)
+      this._userService.updateUser(updUserObj);
+      console.log(updUserObj)
     }
   }
 
