@@ -4,8 +4,14 @@
 
 .mat-list-item:hover{
     transform: translateY(-5px);
+    background-color: aqua;
 }
 
 .icon:hover{
     transform: scale(2, 2)
+}
+
+.active{
+    background-color: red;
+    color: white;
 }

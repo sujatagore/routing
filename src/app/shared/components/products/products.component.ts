@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../../services/products.service';
 import { Iproducts } from '../../module/products.interface';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -15,11 +15,20 @@ export class ProductsComponent implements OnInit {
 
   constructor(
     private _productsService : ProductsService,
-    private _routes : ActivatedRoute
+    private _router : Router
   ) { }
 
   ngOnInit(): void {
-      this.productsData = this._productsService.fetchAllProducts()
+      this.productsData = this._productsService.fetchAllProducts();
+
+      this._router.navigate(['products', this.productsData[0].pid],{
+        //queryParams : {canReturn : this.productsData[0].canReturn, test: 'test'},
+        queryParams : {canReturn : this.productsData[0].canReturn},
+        queryParamsHandling : 'merge'
+      })
   }
 
 }
+
+
+// we can add multiple queryParams

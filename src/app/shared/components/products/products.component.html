@@ -4,17 +4,19 @@
     <div class="col-md-12 text-right">
         <button mat-mini-fab color="accent" class="icon"
         routerLink="addproduct"><mat-icon>plus_one</mat-icon></button>
+        <hr>
     </div>
     <div class="col-md-4">
         <mat-list role="list">
             <mat-list-item role="listitem"
                 *ngFor="let product of productsData"
-                [routerLink]="[product.pid ]"
-                [queryParams]="{canReturn : product.canReturn}">{{product.pname}}</mat-list-item>
+                [routerLink]="[product.pid]"
+                [queryParams]="{canReturn : product.canReturn}"
+                routerLinkActive="active">{{product.pname}}</mat-list-item>
         </mat-list>
     </div>
     <div class="col-md-8">
-
+        <router-outlet></router-outlet>
     </div>
 </div>
 

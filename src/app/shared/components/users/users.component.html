@@ -13,16 +13,27 @@
             <!-- <mat-list-item role="listitem"
                 *ngFor="let user of usersData"
                 [routerLink]="['/users', user.userId ]" << Relative routing
-                [queryParams]="{userRole : user.userRole}">{{user.userName}}</mat-list-item>
-        </mat-list> -->
+                [queryParams]="{userRole : user.userRole}"
+                (click)="getUserId(user.userId)"
+                [ngClass]="{
+                    active : user.userId === selecteduserId
+                } or (click)="selecteduserId = user.userId"
+                [ngClass]="{
+                    active : user.userId === selecteduserId
+                }">{{user.userName}}</mat-list-item>
+            </mat-list> -->
+        
         <mat-list-item role="listitem"
                 *ngFor="let user of usersData"
                 [routerLink]="[user.userId]"
-                [queryParams]="{userRole : user.userRole}">{{user.userName}}</mat-list-item>
+                [queryParams]="{userRole : user.userRole}"
+                routerLinkActive="active">{{user.userName}}
+        </mat-list-item>
+        
         </mat-list>
     </div>
     <div class="col-md-8">
-
+        <router-outlet></router-outlet>
     </div>
 </div>
 

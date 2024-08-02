@@ -1,5 +1,4 @@
 
-
 <!-- <P>
     {{productObj | json}}
 </P> -->
@@ -15,7 +14,7 @@
     
 </mat-card> -->
 
-<mat-card class="product-card">
+<mat-card class="product-card" *ngIf="productObj;else noProductObj">
   <div class="row">
     <div class="col-md-4">
       <img mat-card-xl-image [src]="productObj.images" [alt]="productObj.pname" [title]="productObj.pname">
@@ -40,6 +39,12 @@
     </div>
   </div>
 </mat-card>
+
+<ng-template #noProductObj>
+    <p class="alert alert-warning">
+      No Product with {{productObj.pid}} is available
+    </p>
+</ng-template>
 
 <hr>
 

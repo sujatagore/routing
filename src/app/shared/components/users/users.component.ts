@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { Iusers } from '../../module/users.interface';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -11,15 +11,26 @@ import { ActivatedRoute } from '@angular/router';
 export class UsersComponent implements OnInit {
 
   usersData !: Array<Iusers>
-  userId !: string
+  selecteduserId !: string
 
   constructor(
     private _usersService : UsersService,
-    private _routes : ActivatedRoute
+    private _router : Router
   ) { }
 
   ngOnInit(): void {
-    this.usersData = this._usersService.fetchAllUsers()
+    this.usersData = this._usersService.fetchAllUsers();
+
+    
+    this._router.navigate(['users', this.usersData[0].userId],{
+      queryParams : {userRole : this.usersData[0].userRole},
+      queryParamsHandling : 'merge'
+    })
   }
+
+  // getUserId(userId : string){
+  //     this.selecteduserId = userId;
+  //     console.log(this.selecteduserId) 
+  // }
 
 }

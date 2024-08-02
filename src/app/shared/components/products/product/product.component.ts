@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Iproducts } from 'src/app/shared/module/products.interface';
 import { ProductsService } from 'src/app/shared/services/products.service';
 
@@ -19,9 +19,19 @@ export class ProductComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.productParams()
+  }
+
+  onProductRemove(){
+    if (this.productId) {
+      this._productsService.removeProduct(this.productId)
+    }
+  }
+
+  productParams(){
     this._routes.params
-      .subscribe(res =>{
-        this.productId = res['productId']
+      .subscribe((params:Params) =>{
+        this.productId = params['productId']
         if (this.productId) {
             this.productObj = this._productsService.getProductDetails(this.productId);
             console.log(this.productObj)
@@ -34,12 +44,6 @@ export class ProductComponent implements OnInit {
     //   this.productObj = this._productsService.getProductDetails(this.productId)
     // }
 
-  }
-
-  onProductRemove(){
-    if (this.productId) {
-      this._productsService.removeProduct(this.productId)
-    }
   }
 
 }

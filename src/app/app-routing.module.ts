@@ -22,36 +22,74 @@ const routes : Routes = [
     },
     {
         path : 'users', // http://localhost:4200/users
-        component : UsersComponent
+        component : UsersComponent,
+        children : [
+            {
+                path : '',
+                redirectTo : '1',
+                pathMatch : 'full'
+            },
+            {
+                path : 'addUser', // http://localhost:4200/users/addUser
+                component : UserFormComponent
+            },
+            {
+                path : ':userId', // http://localhost:4200/users/123
+                component : UserComponent
+            },
+            {
+                path : ':userId/editUser', // http://localhost:4200/users/123/editUser
+                component : UserFormComponent
+            }
+        ]
     },
+    // {
+    //     path : 'users/addUser', // http://localhost:4200/users/addUser
+    //     component : UserFormComponent
+    // },
+    // {
+    //     path : 'users/:userId', // http://localhost:4200/users/123
+    //     component : UserComponent
+    // },
+    // {
+    //     path : 'users/:userId/editUser', // http://localhost:4200/users/123/editUser
+    //     component : UserFormComponent
+    // },
     {
-        path : 'users/addUser', // http://localhost:4200/users/addUser
-        component : UserFormComponent
+        path : 'products', // http://localhost:4200/products >> In Child routing - parentPath == products
+        component : ProductsComponent,
+        children : [
+            {
+                path : '',
+                redirectTo : '1?canReturn=1',
+                pathMatch : 'full'
+            },
+            {
+                path : 'addproduct', // parentPath/addproduct
+                component : ProductFormComponent
+            },
+            {
+                path : ':productId', // parentPath/123
+                component : ProductComponent
+            },
+            {
+                path : ':productId/editProduct', // parentPath/123/editProduct
+                component : ProductFormComponent
+            }
+        ]
     },
-    {
-        path : 'users/:userId', // http://localhost:4200/users/123
-        component : UserComponent
-    },
-    {
-        path : 'users/:userId/editUser', // http://localhost:4200/users/123/editUser
-        component : UserFormComponent
-    },
-    {
-        path : 'products', // http://localhost:4200/products
-        component : ProductsComponent
-    },
-    {
-        path : 'products/addproduct', // http://localhost:4200/products/addproduct
-        component : ProductFormComponent
-    },
-    {
-        path : 'products/:productId', // http://localhost:4200/products/123
-        component : ProductComponent
-    },
-    {
-        path : 'products/:productId/editProduct', // http://localhost:4200/users/123/editProduct
-        component : ProductFormComponent
-    },
+    // {
+    //     path : 'products/addproduct', // http://localhost:4200/products/addproduct
+    //     component : ProductFormComponent
+    // },
+    // {
+    //     path : 'products/:productId', // http://localhost:4200/products/123
+    //     component : ProductComponent
+    // },
+    // {
+    //     path : 'products/:productId/editProduct', // http://localhost:4200/products/123/editProduct
+    //     component : ProductFormComponent
+    // },
     {
         path : 'page-not-found', 
         component : PagenotfoundComponent
@@ -72,4 +110,4 @@ export class AppRoutingModule{
 
 }
 
-//wildcard Routing : It matches any url that isn't define in our configration array
+//wildcard Routing : It matches any url that isn't define in our configration array.

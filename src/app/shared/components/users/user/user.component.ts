@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Iusers } from 'src/app/shared/module/users.interface';
 import { UsersService } from 'src/app/shared/services/users.service';
 
@@ -20,18 +20,7 @@ export class UserComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this._routes.params
-    //   .subscribe(res =>{
-    //     this.userId = res['userId']
-    //      if (this.userId) {
-    //         this.userObj = this._usersService.getUserDetails(this.userId)
-    //      }
-    //   })
-
-    this.userId = this._routes.snapshot.params['userId'];
-    if (this.userId) {
-      this.userObj = this._usersService.getUserDetails(this.userId)
-    }
+    this.userParam()
   }
 
   gotoEditUser(){
@@ -47,6 +36,21 @@ export class UserComponent implements OnInit {
     if (this.userId) {
       this._usersService.removeUser(this.userId)
     }
+  }
+
+  userParam(){
+    this._routes.params
+      .subscribe((params: Params) =>{
+        this.userId = params['userId']
+         if (this.userId) {
+            this.userObj = this._usersService.getUserDetails(this.userId)
+         }
+      })
+
+    // this.userId = this._routes.snapshot.params['userId'];
+    // if (this.userId) {
+    //   this.userObj = this._usersService.getUserDetails(this.userId)
+    // }
   }
 
 }
