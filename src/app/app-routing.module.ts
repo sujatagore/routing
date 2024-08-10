@@ -8,21 +8,36 @@ import { UserComponent } from "./shared/components/users/user/user.component";
 import { UserFormComponent } from "./shared/components/users/user-form/user-form.component";
 import { ProductFormComponent } from "./shared/components/products/product-form/product-form.component";
 import { ProductComponent } from "./shared/components/products/product/product.component";
+import { AuthGaurd } from "./shared/services/auth.gaurd";
+import { AuthComponent } from "./shared/components/auth/auth.component";
+import { FairsComponent } from "./shared/components/fairs/fairs.component";
+import { UserRoleGuard } from "./shared/services/user-role.guard";
+import { FairsdetailsComponent } from "./shared/components/fairs/fairsdetails/fairsdetails.component";
 
 //BaseUrl :  http://localhost:4200/
 
 const routes : Routes = [
     {
         path : '', // http://localhost:4200/
-        component : HomeComponent
+        component: AuthComponent
+        // component : HomeComponent,
+        // canActivate : [AuthGaurd],
     },
     {
         path : 'home', // http://localhost:4200/home
-        component : HomeComponent
+        component : HomeComponent,
+        canActivate : [AuthGaurd, UserRoleGuard],
+        data : {
+            userRole : ['buyer', 'admin', 'sa']
+        }
     },
     {
         path : 'users', // http://localhost:4200/users
         component : UsersComponent,
+        canActivate : [AuthGaurd, UserRoleGuard],
+        data : {
+            userRole : ['admin', 'sa']
+        },
         children : [
             {
                 path : '',
@@ -58,12 +73,17 @@ const routes : Routes = [
     {
         path : 'products', // http://localhost:4200/products >> In Child routing - parentPath == products
         component : ProductsComponent,
+        canActivate : [AuthGaurd, UserRoleGuard],
+        // canActivateChild : [AuthGaurd, UserRoleGuard],
+        data : {
+            userRole : ['buyer', 'admin', 'sa']
+        },
         children : [
-            {
-                path : '',
-                redirectTo : '1?canReturn=1',
-                pathMatch : 'full'
-            },
+            // {
+            //     path : '',
+            //     redirectTo : '1?canReturn=1',
+            //     pathMatch : 'full'
+            // },
             {
                 path : 'addproduct', // parentPath/addproduct
                 component : ProductFormComponent
@@ -90,9 +110,27 @@ const routes : Routes = [
     //     path : 'products/:productId/editProduct', // http://localhost:4200/products/123/editProduct
     //     component : ProductFormComponent
     // },
+
+    {
+        path: 'fairs',
+        component: FairsComponent,
+        canActivate : [AuthGaurd, UserRoleGuard],
+        data : {
+            userRole : ['sa']
+        },
+        children : [
+            {
+                path: ':fairId',
+                component: FairsdetailsComponent
+            }
+        ]
+    },  
     {
         path : 'page-not-found', 
-        component : PagenotfoundComponent
+        component : PagenotfoundComponent,
+        data : {
+            msg : 'page not found !!!' // static data >> we can get where we want it ,forEx- componenet or services
+        }
     },
     {
         path : '**', // wildcard routing {its added to last of our routing configration}
@@ -106,8 +144,6 @@ const routes : Routes = [
 })
 
 
-export class AppRoutingModule{
-
-}
+export class AppRoutingModule{ }
 
 //wildcard Routing : It matches any url that isn't define in our configration array.

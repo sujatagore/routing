@@ -21,7 +21,6 @@ export class UsersComponent implements OnInit {
   ngOnInit(): void {
     this.usersData = this._usersService.fetchAllUsers();
 
-    
     this._router.navigate(['users', this.usersData[0].userId],{
       queryParams : {userRole : this.usersData[0].userRole},
       queryParamsHandling : 'merge'

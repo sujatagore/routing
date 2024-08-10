@@ -15,6 +15,10 @@ import { UserFormComponent } from './shared/components/users/user-form/user-form
 import { ProductComponent } from './shared/components/products/product/product.component';
 import { ProductFormComponent } from './shared/components/products/product-form/product-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AuthComponent } from './shared/components/auth/auth.component';
+import { FairsComponent } from './shared/components/fairs/fairs.component';
+import { FaircardsComponent } from './shared/components/fairs/faircards/faircards.component';
+import { FairsdetailsComponent } from './shared/components/fairs/fairsdetails/fairsdetails.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     UserComponent,
     UserFormComponent,
     ProductComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    AuthComponent,
+    FairsComponent,
+    FaircardsComponent,
+    FairsdetailsComponent
   ],
   imports: [
     BrowserModule,

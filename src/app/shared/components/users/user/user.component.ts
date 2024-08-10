@@ -24,7 +24,7 @@ export class UserComponent implements OnInit {
   }
 
   gotoEditUser(){
-      // this._router.navigate(['users', this.userId, 'editUser']) absolute path
+      // this._router.navigate(['users', this.userId, 'editUser']) >> absolute path
       this._router.navigate(['editUser'], {
         relativeTo : this._routes,
         queryParamsHandling : 'preserve'
