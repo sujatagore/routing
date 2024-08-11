@@ -19,6 +19,7 @@ import { AuthComponent } from './shared/components/auth/auth.component';
 import { FairsComponent } from './shared/components/fairs/fairs.component';
 import { FaircardsComponent } from './shared/components/fairs/faircards/faircards.component';
 import { FairsdetailsComponent } from './shared/components/fairs/fairsdetails/fairsdetails.component';
+import { DialogComponent } from './shared/components/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { FairsdetailsComponent } from './shared/components/fairs/fairsdetails/fa
     AuthComponent,
     FairsComponent,
     FaircardsComponent,
-    FairsdetailsComponent
+    FairsdetailsComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,

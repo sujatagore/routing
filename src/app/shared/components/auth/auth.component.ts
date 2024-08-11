@@ -20,7 +20,8 @@ export class AuthComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.createlogInForm()
+    this.createlogInForm();
+    this.createsignUpForm()
   }
 
   createlogInForm(){
@@ -38,6 +39,15 @@ export class AuthComponent implements OnInit {
   }
 
   createsignUpForm(){
+    this.signUpForm = new FormGroup({
+      name: new FormControl(null,[Validators.required]),
+      email: new FormControl(null, [Validators.required]),
+      password: new FormControl(null, [Validators.required]),
+      confirmPassword: new FormControl(null, [Validators.required])
+    });
+  }
+
+  onSubmit(){
 
   }
 
