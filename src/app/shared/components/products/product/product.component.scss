@@ -8,3 +8,24 @@ img{
   width: 100%;
   object-fit: cover;
 }
+
+.rating {
+  font-size: 24px; 
+  color: #ffd700; 
+}
+
+.rating-text {
+  font-size: 16px;
+  color: #666; 
+  margin-left: 10px; 
+}
+
+.fa-star {
+  color: #ffd700;
+}
+
+.fa-star-half-alt {
+  color: #ffd700;
+  position: relative; 
+  top: 1px; 
+}

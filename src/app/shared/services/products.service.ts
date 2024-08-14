@@ -36,7 +36,7 @@ export class ProductsService {
       productDescription: "A sleek and powerful smartphone with a 6.1-inch display, 12MP camera, and A15 Bionic chip.",
       price: 999.99,
       brand: "Apple",
-      rating: 4.8,
+      rating: 3.5,
       images: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGtYsyTQqLoA54euK1Nr2cYU3rteTjjAHMOA&s"
     },
     {
@@ -58,7 +58,7 @@ export class ProductsService {
       productDescription: "A camera-centric smartphone with a 6.4-inch display, 50MP camera, and snappy Google Tensor chip.",
       price: 699.99,
       brand: "Google",
-      rating: 4.7,
+      rating: 2.5,
       images: "https://images.hindustantimes.com/tech/img/2023/02/24/960x540/Untitled_design_-_2023-02-24T124129777_1677222955655_1677222955898_1677222955898.png"
     },
     {

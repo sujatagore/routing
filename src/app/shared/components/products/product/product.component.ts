@@ -45,5 +45,16 @@ export class ProductComponent implements OnInit {
     // }
 
   }
+ 
+  get fullStars(): number[] {
+    return Array(Math.floor(this.productObj.rating)).fill(0);
+  }
 
+  get halfStar(): boolean {
+    return this.productObj.rating % 1 !== 0;
+  }
+
+  get emptyStars(): number[] {
+    return Array(5 - Math.ceil(this.productObj.rating)).fill(0);
+  }
 }
