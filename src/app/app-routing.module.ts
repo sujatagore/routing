@@ -13,6 +13,10 @@ import { AuthComponent } from "./shared/components/auth/auth.component";
 import { FairsComponent } from "./shared/components/fairs/fairs.component";
 import { UserRoleGuard } from "./shared/services/user-role.guard";
 import { FairsdetailsComponent } from "./shared/components/fairs/fairsdetails/fairsdetails.component";
+import { UsersResolverService } from "./shared/services/users-resolver.service";
+import { ProductsResolverService } from "./shared/services/products-resolver.service";
+import { FairsResolverService } from "./shared/services/fairs-resolver.service";
+import { CompDeactivateGuard } from "./shared/services/comp-deactivate.guard";
 
 //BaseUrl :  http://localhost:4200/
 
@@ -29,15 +33,18 @@ const routes : Routes = [
         canActivate : [AuthGaurd, UserRoleGuard],
         data : {
             userRole : ['buyer', 'admin', 'sa']
-        }
+        },
+        title: 'Home'
     },
     {
         path : 'users', // http://localhost:4200/users
         component : UsersComponent,
         canActivate : [AuthGaurd, UserRoleGuard],
+        resolve : {usersData : UsersResolverService},
         data : {
             userRole : ['admin', 'sa']
         },
+        title: 'Users',
         children : [
             {
                 path : '',
@@ -75,9 +82,11 @@ const routes : Routes = [
         component : ProductsComponent,
         canActivate : [AuthGaurd, UserRoleGuard],
         // canActivateChild : [AuthGaurd, UserRoleGuard],
+        resolve: {productsData : ProductsResolverService},
         data : {
             userRole : ['buyer', 'admin', 'sa']
         },
+        title: 'Products',
         children : [
             // {
             //     path : '',
@@ -94,7 +103,8 @@ const routes : Routes = [
             },
             {
                 path : ':productId/editProduct', // parentPath/123/editProduct
-                component : ProductFormComponent
+                component : ProductFormComponent,
+                canDeactivate: [CompDeactivateGuard]
             }
         ]
     },
@@ -115,9 +125,11 @@ const routes : Routes = [
         path: 'fairs',
         component: FairsComponent,
         canActivate : [AuthGaurd, UserRoleGuard],
+        resolve: {fairsData : FairsResolverService},
         data : {
             userRole : ['sa']
         },
+        title: 'Fairs',
         children : [
             {
                 path: ':fairId',

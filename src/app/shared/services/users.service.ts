@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Iusers } from '../module/users.interface';
 import { Router } from '@angular/router';
 import { SnackbarService } from './snackbar.service';
+import { DialogService } from './dialog.service';
 
 @Injectable({
   providedIn: 'root'
@@ -77,7 +78,8 @@ export class UsersService {
 
   constructor(
     private _router : Router,
-    private _snackbar : SnackbarService
+    private _snackbar : SnackbarService,
+    private _dialogService : DialogService
   ) { }
 
   fetchAllUsers() : Array<Iusers> {
@@ -103,10 +105,16 @@ export class UsersService {
   }
 
   removeUser(userId : string){
-    let getIndex = this.usersArr.findIndex(user => user.userId === userId);
-    let removeUser = this.usersArr[getIndex]
-    this.usersArr.splice(getIndex, 1)
-    this._router.navigate(['/users']);
-    this._snackbar.openSnackBar(`The user ${removeUser.userName} is removed Successfully!!!`)
+    let userName = this.usersArr.find(user => user.userId === userId)?.userName
+    this._dialogService.openDialog('Confirmation', `Are You sure ? You want to remove ${userName} User?`)
+    .subscribe(res =>{
+      if (res) {
+        let getIndex = this.usersArr.findIndex(user => user.userId === userId);
+        let removeUser = this.usersArr[getIndex]
+        this.usersArr.splice(getIndex, 1)
+        this._router.navigate(['/users']);
+        this._snackbar.openSnackBar(`The user ${removeUser.userName} is removed Successfully!!!`)
+      }
+    })
   }
 }

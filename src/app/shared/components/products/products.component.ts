@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../../services/products.service';
 import { Iproducts } from '../../module/products.interface';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -15,17 +15,29 @@ export class ProductsComponent implements OnInit {
 
   constructor(
     private _productsService : ProductsService,
-    private _router : Router
-  ) { }
+    private _router : Router,
+    private _routes : ActivatedRoute
+  ) { 
+    this._routes.data
+        .subscribe(metaData =>{
+            this.productsData = metaData['productsData'];
+            console.log(metaData);
+            this._router.navigate(['products', this.productsData[0].pid],{
+              //queryParams : {canReturn : this.productsData[0].canReturn, test: 'test'},
+              queryParams : {canReturn : this.productsData[0].canReturn},
+              queryParamsHandling : 'merge'
+            })
+        })
+  }
 
   ngOnInit(): void {
-      this.productsData = this._productsService.fetchAllProducts();
+      // this.productsData = this._productsService.fetchAllProducts();
 
-      this._router.navigate(['products', this.productsData[0].pid],{
-        //queryParams : {canReturn : this.productsData[0].canReturn, test: 'test'},
-        queryParams : {canReturn : this.productsData[0].canReturn},
-        queryParamsHandling : 'merge'
-      })
+      // this._router.navigate(['products', this.productsData[0].pid],{
+      //   //queryParams : {canReturn : this.productsData[0].canReturn, test: 'test'},
+      //   queryParams : {canReturn : this.productsData[0].canReturn},
+      //   queryParamsHandling : 'merge'
+      // })
   }
 
 }

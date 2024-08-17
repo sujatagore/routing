@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Iproducts } from '../module/products.interface';
 import { Router } from '@angular/router';
 import { SnackbarService } from './snackbar.service';
+import { DialogService } from './dialog.service';
 
 @Injectable({
   providedIn: 'root'
@@ -87,7 +88,8 @@ export class ProductsService {
 
   constructor(
     private _router : Router,
-    private _snackbar : SnackbarService
+    private _snackbar : SnackbarService,
+    private _dialogService : DialogService
   ) { }
 
   fetchAllProducts() : Array<Iproducts>{
@@ -113,11 +115,21 @@ export class ProductsService {
   }
 
   removeProduct(productId : string){
-      let getIndex = this.productsArr.findIndex(pro => pro.pid === productId);
-      let removeProduct = this.productsArr[getIndex]
-      this.productsArr.splice(getIndex, 1)
-      this._router.navigate(['/products']);
-      this._snackbar.openSnackBar(`Product ${removeProduct.pname} is Removed Successfully!!!`)
-  }
+      let prodName = this.productsArr.find(prod=>prod.pid === productId)?.pname
+      this._dialogService.openDialog('Confirmation', `Are You sure ? You want to remove ${prodName} product?`)
+      .subscribe(res=>{
+          if(res){
+            let removeIndex = this.productsArr.findIndex((prod)=>prod.pid === productId);
+            this.productsArr.splice(removeIndex,1);
+            this._snackbar.openSnackBar(`The Product ${prodName} is removed successfully !! 👍`);
+            this._router.navigate(['/products'])
+          }
+        })
+      }
+      // let getIndex = this.productsArr.findIndex(pro => pro.pid === productId);
+      // let removeProduct = this.productsArr[getIndex]
+      // this.productsArr.splice(getIndex, 1)
+      // this._router.navigate(['/products']);
+      // this._snackbar.openSnackBar(`Product ${removeProduct.pname} is Removed Successfully!!!`)
 
 }

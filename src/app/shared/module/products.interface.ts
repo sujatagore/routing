@@ -7,6 +7,8 @@
 //     canReturn: number;
 // }
 
+import { Observable } from "rxjs";
+
 export interface Iproducts{
         pid: string;
         pname: string;
@@ -17,4 +19,8 @@ export interface Iproducts{
         brand: string;
         rating: number;
         images: string;
+}
+
+export interface IcanDeactivateComp{
+        canDeactive : () => boolean | Observable<boolean> | Promise<boolean>
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Iproducts } from 'src/app/shared/module/products.interface';
+import { Observable } from 'rxjs';
+import { IcanDeactivateComp, Iproducts } from 'src/app/shared/module/products.interface';
 import { ProductsService } from 'src/app/shared/services/products.service';
 import { UuidService } from 'src/app/shared/services/uuid.service';
 
@@ -10,7 +11,7 @@ import { UuidService } from 'src/app/shared/services/uuid.service';
   templateUrl: './product-form.component.html',
   styleUrls: ['./product-form.component.scss']
 })
-export class ProductFormComponent implements OnInit {
+export class ProductFormComponent implements OnInit, IcanDeactivateComp {
 
   productForm !: FormGroup
 
@@ -21,6 +22,8 @@ export class ProductFormComponent implements OnInit {
   prodObj !: Iproducts;
 
   canReturn !: number;
+
+  isUpdated : boolean = false;
 
   constructor(
     private _uuidService : UuidService,
@@ -96,8 +99,19 @@ export class ProductFormComponent implements OnInit {
       let canReturnValue = +this.productForm.get('canReturn')?.value
       let updObj : Iproducts = {...this.productForm.value, canReturn: canReturnValue, pid: this.productId};
       console.log(updObj);
+      this.isUpdated = true;
       this._productsService.updateProduct(updObj)
     }
   }
 
+  canDeactive(): boolean | Observable<boolean> | Promise<boolean>{
+    // If product edit or not updated then only return true / false otherwise return true
+      if (this.productForm.dirty && !this.isUpdated) {
+        // Confirmation >> you want to discard(true) / update(false)
+        let getConfirm = confirm(`Are you sure you want to discard these changes?`)
+        return getConfirm
+      } else {
+        return true
+      }
+  }
 }
